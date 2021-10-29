@@ -170,7 +170,7 @@ func updateadetails(w http.ResponseWriter, r *http.Request) { //it update some f
 
 }
 func handlerequest() {
-	myrouter := mux.NewRouter()
+	myrouter := mux.NewRouter() //initializing a router
 
 	myrouter.HandleFunc("/", homepage) //it registers the Api signature and the function to the mux
 
@@ -190,7 +190,8 @@ func handlerequest() {
 }
 func handlerequest_database() {
 	router := mux.NewRouter()
-	router.HandleFunc("/getdetail", handdler.Getalldetails)
+	router.HandleFunc("/", handdler.Welcomeresponse)
+	router.HandleFunc("/getdetails", handdler.Getalldetails)
 	log.Fatal(http.ListenAndServe(":8081", router))
 }
 func main() {
@@ -200,6 +201,6 @@ func main() {
 		{3, "Anil", "4cb17cs007", "Nitte", "Bangalore"},
 		{4, "Roy", "4CB17CS013", "RV", "Bangalore"},
 	}
-	handlerequest()
-	//handlerequest_database()
+	//handlerequest()
+	handlerequest_database()
 }
