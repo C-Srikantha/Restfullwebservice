@@ -190,9 +190,13 @@ func handlerequest() {
 }
 func handlerequest_database() {
 	router := mux.NewRouter()
-	router.HandleFunc("/", handdler.Welcomeresponse)
-	router.HandleFunc("/getdetails", handdler.Getalldetails)
-	log.Fatal(http.ListenAndServe(":8081", router))
+	router.HandleFunc("/", handdler.Welcomeresponse).Methods("GET")                    //it registers the Api signature and the function to the mux
+	router.HandleFunc("/getdetails", handdler.Getalldetails).Methods("GET")            //it registers the Api signature and the function to the mux
+	router.HandleFunc("/getdetails/{id}", handdler.Getadetails).Methods("GET")         //it registers the Api signature and the function to the mux
+	router.HandleFunc("/adddetails", handdler.Postdetails).Methods("POST")             //it registers the Api signature and the function to the mux
+	router.HandleFunc("/deletedetails/{id}", handdler.Deletedetails).Methods("DELETE") //it registers the Api signature and the function to the mux
+	router.HandleFunc("/updatedetails/{id}", handdler.Updatedetails).Methods("PUT")    //it registers the Api signature and the function to the mux
+	log.Fatal(http.ListenAndServe(":8081", router))                                    //creates a server and assign a port and router,it listens to port and send the request to mux
 }
 func main() {
 	m = []Details{
